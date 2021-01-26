@@ -1,0 +1,50 @@
+.bar__account-button {
+  margin: 8px;
+  line-height: 0;
+}
+
+.image-container {
+  height: 48px;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-image {
+  height: 40px;
+  width: 40px;
+  border-radius: 24px;
+  cursor: pointer;
+  margin:auto;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.user-image:not(.user-image__active):hover {
+  border-style: solid;
+  border-width: 3px;
+  border-color: #c8e6c9;
+  -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+
+.user-image__active {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #81c784;
+}
+
+.btn.green.darken-3:hover {
+  background-color: #1B5E20;
+}
+
+.btn.green.darken-3:active {
+  background-color: #388E3C;
+}
+
+.bar__popup {
+  position: absolute;
+  top: 72px;
+  right: 8px;
+}
