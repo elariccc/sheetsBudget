@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import {gapi} from 'gapi-script';
 
+import TextInput from '../../components/textInput/textInput';
+
 import './googleAuthComponent.css';
 import '../../materialize/button.css';
 import '../../materialize/shadow.css';
@@ -163,10 +165,11 @@ export default function GoogleAuthComponent({authState}) {
             </button>
           </div>
           <hr/>
-          <div class='input-field'>
+          {/* <div class='input-field'>
             <input id='popup__sheetId' type='text' class='validate'/>
             <label htmlFor='popup__sheetId'>Spreadsheet ID</label>
-          </div>
+          </div> */}
+          <TextInput id='popup_sheetId' label='SpreadSheet ID'/>
           <button onClick={handleFetchClick} className='btn green darken-3 z-depth-0'>
             fetch data
           </button>
