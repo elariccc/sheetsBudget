@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import {gapi} from 'gapi-script';
 
 import './googleAuthComponent.css';
-import '../materialize/button.css';
-import '../materialize/shadow.css';
-import '../materialize/card.css';
-import '../materialize/preloader.css';
-import '../materialize/fade.css';
-import '../materialize/textInput.css';
+import '../../materialize/button.css';
+import '../../materialize/shadow.css';
+import '../../materialize/card.css';
+import '../../materialize/preloader.css';
+import '../../materialize/fade.css';
+import '../../materialize/textInput.css';
 
 import React from 'react';
-import Modal from "../components/modal";
+import Modal from "../../components/modal";
 
 let googleAuth;
 const API_KEY = 'AIzaSyD7EpkVfwnYbLmrpFxtnKX7EzqgXgHZO_Y';

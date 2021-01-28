@@ -15,7 +15,7 @@ export default function Modal ({
   return opened
     ? <>
         <div 
-          style={{zIndex: '2000'}}
+          style={{zIndex: '1001'}}
           className={className}
         >
           {children}

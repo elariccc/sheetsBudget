@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import GoogleAuthComponent from '../googleAuthComponent/googleAuthComponent';
-import '../materialize/palette.css';
-import '../materialize/grid.css';
+import '../../materialize/palette.css';
+import '../../materialize/grid.css';
 import './menuBar.css';
 
 export default function MenuBar() {
