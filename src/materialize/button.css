@@ -6,7 +6,7 @@
   height: 36px;
   line-height: 36px;
   padding: 0 16px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent;
 }
@@ -234,4 +234,20 @@ button.btn-floating {
 .btn:hover, .btn-large:hover, .btn-small:hover, .btn-floating:hover {
   -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
           box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+
+.btn.green.darken-3:hover {
+  background-color: #1B5E20;
+}
+
+.btn.green.darken-3:active {
+  background-color: #388E3C;
+}
+
+.btn-small.green.darken-3:hover {
+  background-color: #1B5E20;
+}
+
+.btn-small.green.darken-3:active {
+  background-color: #388E3C;
 }

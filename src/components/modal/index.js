@@ -1,19 +1,28 @@
-import Layout from "./layout";
+import React from 'react';
+
+import Layout from "../layout/index";
 
 export default function Modal ({
-  opened, 
-  setOpened, 
+  openedState, 
   children, 
   className,
   layoutOpacity,
   layoutColor,
 }) {
   const handleLayoutClick = () => {
-    setOpened && setOpened(false);
+    openedState && openedState.set(false);
   }
 
-  return opened
-    ? <>
+  const opened = 
+    openedState ?
+      openedState.value
+    : 
+      true
+  ;
+
+  return (
+    opened ? 
+      <React.Fragment>
         <div 
           style={{zIndex: '1001'}}
           className={className}
@@ -25,6 +34,8 @@ export default function Modal ({
           opacity={layoutOpacity}
           color={layoutColor}
         />
-      </>
-    : null;
+      </React.Fragment>
+    : 
+      null
+  );
 }

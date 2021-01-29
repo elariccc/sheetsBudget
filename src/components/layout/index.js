@@ -22,8 +22,8 @@ export default function Layout({color = 'black', opacity = 0.5, onClick}) {
   )
 
   return (
-    layoutEl 
-      ? ReactDOM.createPortal(
+    layoutEl ?
+      ReactDOM.createPortal(
         <div
           style={{
             position: 'fixed',
@@ -39,6 +39,7 @@ export default function Layout({color = 'black', opacity = 0.5, onClick}) {
         ></div>,
         layoutEl
       )
-      : null
+    : 
+      null
   );
 }

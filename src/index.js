@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MenuBar from './containers/menuBar/menuBar'
+
+import App from './containers/app/index'
+
 import './index.css';
 
 ReactDOM.render(
-  <MenuBar />,
+  <App />,
   document.getElementById('root')
 );
