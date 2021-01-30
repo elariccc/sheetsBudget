@@ -18,7 +18,7 @@ export default function Popup(
     userInfo,
   }
 ) {
-  const [ sheetUrl, setSheetUrl ] = useState(null);
+  const [ sheetUrl, setSheetUrl ] = useState('');
   const sheetUrlState = useMemo (
     () => (
       {
@@ -27,15 +27,18 @@ export default function Popup(
       }
     ),
     [sheetUrl, setSheetUrl]
-  )
+  );
 
   const [ attachingError, setAttachingError ] = useState(null);
 
   useEffect(
     () => {
-      if (!openedState.value) setAttachingError(null);
+      if (!openedState.value) {
+        if (attachingError) setSheetUrl('');
+        setAttachingError(null);
+      }
     },
-    [openedState.value]
+    [openedState.value, attachingError]
   )
 
   const handleLogOutClick = () => {
@@ -57,8 +60,6 @@ export default function Popup(
       const leftCuttedUrl = sheetUrl.slice(indexLeft);
       const indexRight = leftCuttedUrl.indexOf('/');
       const sheetId = leftCuttedUrl.slice(0, indexRight > 0 ? indexRight : undefined);
-  
-      authState.sheetId.set(sheetId);
 
       const response = await gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: sheetId,
@@ -67,13 +68,19 @@ export default function Popup(
         dateTimeRenderOption: 'FORMATTED_STRING',
       });
 
-      const fetchedTemplateKey = response.result.values[0][0];
-
+      const fetchedTemplateKey = 
+        response.result.values ?
+          response.result.values[0][0]
+        :
+          null
+      ;
+      
       if (fetchedTemplateKey !== TEMPLATE_KEY) {
-        throw new TemplateError('Spreadsheet is not found');
+        throw new TemplateError('The spreadsheet is not a template');
       }
 
       setAttachingError(null);
+      authState.sheetId.set(sheetId);
     } catch (error) {
       setAttachingError(error);
       authState.sheetId.set(null);
@@ -156,7 +163,6 @@ export default function Popup(
             id='popup_sheetUrl' 
             label='Spreadsheet URL'
             inputState={sheetUrlState}
-            defaultValue={authState.sheetId.value}
           />
           <button 
             onClick={handleAttachClick} 

@@ -1,5 +1,7 @@
 import React, {useMemo, useState} from 'react';
+
 import GoogleAuth from '../googleAuth/index';
+
 import '../../materialize/palette.css';
 import './index.css';
 

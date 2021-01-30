@@ -1,17 +1,14 @@
 import './index.css';
 import { useState, useEffect } from 'react';
 
-export default function TextInput({id, label, inputState, defaultValue}) {
+export default function TextInput({id, label, inputState}) {
   const [active, setActive] = useState(false);
 
   useEffect(
     () => {
-     if (defaultValue) setActive(true);
-     return () => {
-       inputState.set(null);
-     }
+     if (inputState.value) setActive(true);
     },
-    [defaultValue, inputState]
+    [inputState.value]
   );
 
   const handleInputChange = (event) => {
@@ -22,8 +19,8 @@ export default function TextInput({id, label, inputState, defaultValue}) {
     setActive(true);
   };
 
-  const handleInputBlur = (event) => {
-    if (event.target.value === '') setActive(false);
+  const handleInputBlur = () => {
+    if (inputState.value === '') setActive(false);
   };
 
   const handleLabelClick = (event) => {
@@ -40,7 +37,6 @@ export default function TextInput({id, label, inputState, defaultValue}) {
         id={id} 
         type='text' 
         value={inputState.value}
-        defaultValue={defaultValue}
         className='text-input__field'
         onChange={handleInputChange}
         onFocus={handleInputFocus}
