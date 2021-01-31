@@ -6,6 +6,7 @@ export default function Modal ({
   openedState, 
   children, 
   className,
+  renderLayout,
   layoutOpacity,
   layoutColor,
 }) {
@@ -29,11 +30,16 @@ export default function Modal ({
         >
           {children}
         </div>
-        <Layout 
-          onClick={handleLayoutClick}
-          opacity={layoutOpacity}
-          color={layoutColor}
-        />
+        {
+        renderLayout ?
+          <Layout 
+            onClick={handleLayoutClick}
+            opacity={layoutOpacity}
+            color={layoutColor}
+          />
+        :
+          null
+        }
       </React.Fragment>
     : 
       null

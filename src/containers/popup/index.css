@@ -26,20 +26,6 @@
   border-radius: 50%;
 }
 
-.input-container {
-  display: flex;
-  align-items: baseline;
-}
-
-.input-container .text-input {
-  flex-grow: 1;
-  width: 100%;
-}
-
-.input-container button {
-  margin-right: 0;
-}
-
 .attach-status {
   font-size: x-small;
 }
