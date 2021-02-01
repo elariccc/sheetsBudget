@@ -11,29 +11,13 @@ export default function Popup({
 }) {
   const handleLogOutClick = () => {
     googleAuthState.value.signOut();
-    authState.spreadsheetId.set(null);
     openedState.set(false);
   };
 
   const handleRevokeAccessClick = () => {
     googleAuthState.value.disconnect();
-    authState.spreadsheetId.set(null);
     openedState.set(false);
   };
-
-  const attachStatus = 
-    authState.spreadsheetId.value ?
-      <p className='attach-status green-text text-darken-3'>
-        Spreadsheet is successfully attached
-      </p>
-    :
-      attachingError ?
-        <p className='attach-status red-text'>
-          {attachingError}
-        </p>
-      :
-        null
-  ;
 
   return (
     <Modal 
@@ -62,8 +46,6 @@ export default function Popup({
             Revoke access
           </button>
         </div>
-        <hr/>
-        {attachStatus}
       </div>
     </Modal>
   );

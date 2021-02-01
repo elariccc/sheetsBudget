@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import {gapi} from 'gapi-script';
+import { gapi } from 'gapi-script';
 
 import Popup from '../popup/index';
 import LoadBar from '../../components/loadBar/index';
@@ -9,7 +9,7 @@ import { API_KEY, CLIENT_ID, SCOPES, DISCOVERY_DOCS, TEMPLATE_KEY, SPREADSHEET_I
 
 import './index.css';
 
-export default function GoogleAuth({authState}) {
+export default function GoogleAuth({authState, showMessage}) {
   const [ isInited, setIsInited ] = useState(false);
   const [ loadingStatus, setLoadingStatus ] = useState(null);
   const [ attachingError, setAttachingError ] = useState(null);
@@ -38,13 +38,15 @@ export default function GoogleAuth({authState}) {
 
   useEffect(
     () => {
-      setLoadingStatus('Initiating Google API client');
-      
-      gapi.load('client:auth2', {
-        callback: initClient,
-        timeout: 5000,
-        ontimeout: handleTimeout,
-      });
+      if (!isInited && !authState.isSignedIn.value) {
+        setLoadingStatus('Initiating Google API client');
+        
+        gapi.load('client:auth2', {
+          callback: initClient,
+          timeout: 5000,
+          ontimeout: handleTimeout,
+        });
+      }
 
       async function initClient() {
         try {
@@ -62,6 +64,8 @@ export default function GoogleAuth({authState}) {
           setGoogleAuth(googleAuthInstance);
           googleAuthInstance.isSignedIn.listen(() => authState.isSignedIn.set(googleAuthInstance.isSignedIn.get()));
           authState.isSignedIn.set(googleAuthInstance.isSignedIn.get());
+
+          showMessage('Google API client has been initiated');
         } catch (error) {
           console.log(error.error.message);
         } finally {
@@ -74,12 +78,12 @@ export default function GoogleAuth({authState}) {
         setLoadingStatus(null);
       }
     },
-    []
+    [isInited, authState.isSignedIn, showMessage]
   );
 
   useEffect(
     () => {
-      if (authState.isSignedIn.value) {
+      if (authState.isSignedIn.value && !authState.spreadsheetId.value) {
         attachSpreadsheet();
       }
 
@@ -120,7 +124,7 @@ export default function GoogleAuth({authState}) {
             ;
     
             if (fetchedKey === TEMPLATE_KEY) {
-              spreadsheetWithCorrectKeyId = fetchedKey;
+              spreadsheetWithCorrectKeyId = spreadsheetIds[i];
               break;
             }
           }
@@ -146,6 +150,8 @@ export default function GoogleAuth({authState}) {
             authState.spreadsheetId.set(spreadsheetWithCorrectKeyId);
           }
 
+          showMessage('Your budget spreadsheet has been attached')
+
           setLoadingStatus(null);
         } catch (response) {
           setAttachingError(response.result.error.message);
@@ -153,7 +159,7 @@ export default function GoogleAuth({authState}) {
         }
       }
     },
-    [authState.isSignedIn.value]
+    [authState.isSignedIn.value, showMessage, authState.spreadsheetId]
   )
 
   const handleLogInClick = () => {
