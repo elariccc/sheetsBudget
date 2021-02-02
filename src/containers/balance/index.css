@@ -1,0 +1,75 @@
+.menu-bar__balance {
+  display: flex;
+  align-items: center;
+}
+
+.balance__label {
+  margin: 0 10px 0 0;
+}
+
+.balance__number {
+  font-family: monospace;
+  font-size: larger;
+  padding: 0.5em;
+  margin: 2px;
+  border-bottom-style: solid;
+}
+
+.balance__number-mask {
+  width: 24px;
+  height: 40px;
+  margin: 2px;
+  overflow: hidden;
+}
+
+.balance__number-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.number-container--change {
+  animation: number-container--change 1s ease-in;
+}
+
+.mask--thousand {
+  margin-right: 8px;
+}
+
+@keyframes number-container--change {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.number-top--change {
+  animation: number-top--change 1s ease-in;
+}
+
+@keyframes number-top--change {
+  0% {
+    transform: rotateX(0);
+  }
+
+  100% {
+    transform: rotateX(90deg);
+  }
+}
+
+.number-bottom--change {
+  animation: number-bottom--change 1s ease-in;
+}
+
+@keyframes number-bottom--change {
+  0% {
+    transform: rotateX(90deg);
+  }
+
+  100% {
+    transform: rotateX(0);
+  }
+}

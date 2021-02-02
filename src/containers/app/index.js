@@ -5,10 +5,13 @@ import { gapi } from 'gapi-script';
 import MenuBar from '../menuBar/index';
 import MessagePanel from '../messagePanel/index';
 import LoadBar from '../../components/loadBar/index';
+import Transactions from '../transactions/index';
+
+import './index.css';
 
 import '../../materialize/button.css';
 import '../../materialize/card.css';
-import '../../materialize/appearAnimation.css';
+import '../../materialize/animations.css';
 import '../../materialize/palette.css';
 import '../../materialize/preloader.css';
 import '../../materialize/shadow.css';
@@ -39,7 +42,7 @@ export default function App() {
   const [ updateTick, setUpdateTick ] = useState(0);
   const [ updatingStatus, setUpdatingStatus ] = useState(null);
 
-  function update() {
+  function updateData() {
     setUpdateTick(prevTick => ++prevTick);
   }
 
@@ -98,7 +101,14 @@ export default function App() {
 
   return (
     <React.Fragment>
-      <MenuBar authState={authState} update={update} showMessage={showMessage}/>
+      <MenuBar
+        authState={authState}
+        balance={balance}
+        showMessage={showMessage}
+      />
+      <div className='field-container'>
+        <Transactions/>
+      </div>
       <LoadBar status={updatingStatus}/>
       <MessagePanel message={message}/>
     </React.Fragment>

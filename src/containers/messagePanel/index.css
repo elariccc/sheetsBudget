@@ -5,6 +5,7 @@
   font-size: small;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 }
 
 .message-element.card {
