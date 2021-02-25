@@ -7,12 +7,10 @@ export default function Balance({value, show}) {
 
   useEffect(
     () => {
-      if (value) {
-        const originNumbers = Array.from(String(value.toFixed(2)));
-        const newNumbers = new Array(9 - originNumbers.length).fill('\u00A0');
-        newNumbers.push(...originNumbers);
-        setNumbers(newNumbers);
-      }
+      const originNumbers = Array.from(String(Number(value).toFixed(2)));
+      const newNumbers = new Array(9 - originNumbers.length).fill('\u00A0');
+      newNumbers.push(...originNumbers);
+      setNumbers(newNumbers);
     },
     [value]
   );
@@ -65,7 +63,7 @@ function BalanceNumber({number, thousand}) {
             setTopNumber(number);
             setIsChanging(false);
           },
-          1000
+          995
         )
       }
     },

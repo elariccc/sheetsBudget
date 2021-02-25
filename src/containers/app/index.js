@@ -1,20 +1,21 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
 import { gapi } from 'gapi-script';
 
 import MenuBar from '../menuBar/index';
-import MessagePanel from '../messagePanel/index';
+import MessagePanel from '../../components/messagePanel/index';
 import LoadBar from '../../components/loadBar/index';
 import Transactions from '../transactions/index';
 
 import './index.css';
 
+import '../../materialize/animations.css';
 import '../../materialize/button.css';
 import '../../materialize/card.css';
-import '../../materialize/animations.css';
 import '../../materialize/palette.css';
 import '../../materialize/preloader.css';
 import '../../materialize/shadow.css';
+import '../../materialize/table.css';
 
 export default function App() {
   const [ isSignedIn, setIsSignedIn ] = useState(false);
@@ -36,7 +37,15 @@ export default function App() {
     [isSignedIn, setIsSignedIn, spreadsheetId, setSpreadsheetId]
   );
 
-  const [ message, showMessage ] = useState(null);
+  const [ message, setMessage ] = useState(null);
+
+  const showMessage = useCallback(
+    newMessage => {
+      setMessage(null);
+      setMessage(newMessage);
+    },
+    [ setMessage ]
+  );
 
   const [ spreadsheetBatch, setSpreadsheetBatch ] = useState(null);
   const [ updateTick, setUpdateTick ] = useState(0);
@@ -46,6 +55,7 @@ export default function App() {
     setUpdateTick(prevTick => ++prevTick);
   }
 
+  //update data body
   useEffect(
     () => {
       if (isSignedIn && spreadsheetId) fetchUpdatedValues();
@@ -58,6 +68,7 @@ export default function App() {
             spreadsheetId: spreadsheetId,
             ranges: [
               "'Бюджет'!F1",
+              "'Бюджет'!A3:C701",
             ],
             valueRenderOption: 'UNFORMATTED_VALUE',
             dateTimeRenderOption: 'FORMATTED_STRING',
@@ -67,6 +78,7 @@ export default function App() {
     
           setSpreadsheetBatch({
             balance: valueRanges[0],
+            transactions: valueRanges[1],
           });
 
           showMessage('Data has been updated');
@@ -77,9 +89,24 @@ export default function App() {
         }
       }
     },
-    [spreadsheetId, updateTick, isSignedIn]
+    [spreadsheetId, updateTick, isSignedIn, showMessage]
+  );
+ 
+  const [ balance, setBalance ] = useState(null);
+  const [ transactionsData, setTransactionsData ] = useState([]);
+
+  //setting data to its hooks
+  useEffect(
+    () => {
+      if (spreadsheetBatch) {
+        setBalance(spreadsheetBatch.balance.values[0][0]);
+        setTransactionsData(spreadsheetBatch.transactions.values ? spreadsheetBatch.transactions.values : []);
+      }
+    },
+    [spreadsheetBatch]
   );
 
+   //handle sign out
   useEffect(
     () => {
       if (!isSignedIn) {
@@ -88,15 +115,6 @@ export default function App() {
       }
     },
     [isSignedIn, setSpreadsheetId, setSpreadsheetBatch]
-  )
-
-  const [ balance, setBalance ] = useState(null);
-
-  useEffect(
-    () => {
-      if (spreadsheetBatch) setBalance(spreadsheetBatch.balance.values[0][0]);
-    },
-    [spreadsheetBatch]
   );
 
   return (
@@ -107,7 +125,11 @@ export default function App() {
         showMessage={showMessage}
       />
       <div className='field-container'>
-        <Transactions/>
+        <Transactions
+          authState={authState}
+          updateData={updateData}
+          transactionsData={transactionsData}
+        />
       </div>
       <LoadBar status={updatingStatus}/>
       <MessagePanel message={message}/>

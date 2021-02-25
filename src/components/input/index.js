@@ -1,7 +1,7 @@
 import './index.css';
 import { useState, useEffect } from 'react';
 
-export default function TextInput({id, label, inputState}) {
+export default function Input({id, label, inputState, type, required}) {
   const [active, setActive] = useState(false);
 
   useEffect(
@@ -27,20 +27,21 @@ export default function TextInput({id, label, inputState}) {
     if (active) event.preventDefault();
   };
 
-  let labelClass = 'text-input__label';
-  if (active) labelClass += ' text-input__label--active';
+  let labelClass = 'input__label';
+  if (active) labelClass += ' input__label--active';
 
   return (
-    <div className='text-input'>
+    <div className='input'>
       <input 
         autoComplete='off' 
         id={id} 
-        type='text' 
+        type={type} 
         value={inputState.value}
-        className='text-input__field'
+        className='input__field'
         onChange={handleInputChange}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+        required={required}
       />
       <label 
         htmlFor={id}

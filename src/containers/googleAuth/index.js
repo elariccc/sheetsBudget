@@ -12,7 +12,6 @@ import './index.css';
 export default function GoogleAuth({authState, showMessage}) {
   const [ isInited, setIsInited ] = useState(false);
   const [ loadingStatus, setLoadingStatus ] = useState(null);
-  const [ attachingError, setAttachingError ] = useState(null);
 
   const [ googleAuth, setGoogleAuth ] = useState(null);
   const googleAuthState = useMemo (
@@ -154,12 +153,11 @@ export default function GoogleAuth({authState, showMessage}) {
 
           setLoadingStatus(null);
         } catch (response) {
-          setAttachingError(response.result.error.message);
           setLoadingStatus(null);
         }
       }
     },
-    [authState.isSignedIn.value, showMessage, authState.spreadsheetId]
+    [authState.isSignedIn.value, showMessage, authState.spreadsheetId.value, authState.spreadsheetId]
   )
 
   const handleLogInClick = () => {
@@ -213,7 +211,6 @@ export default function GoogleAuth({authState, showMessage}) {
         googleAuthState={googleAuthState}
         openedState={popupOpenedState}
         userInfo={userInfo}
-        attachingError={attachingError}
       />
       <LoadBar status={loadingStatus}/>
     </React.Fragment>

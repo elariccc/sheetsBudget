@@ -7,7 +7,6 @@ export default function Popup({
   googleAuthState,
   openedState,
   userInfo,
-  attachingError,
 }) {
   const handleLogOutClick = () => {
     googleAuthState.value.signOut();

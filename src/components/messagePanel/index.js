@@ -56,7 +56,7 @@ function MessageElement ({message}) {
       );
     },
     []
-  )
+  );
 
   const messageClass = `message-element card green lighten-3 ${animation}`;
 

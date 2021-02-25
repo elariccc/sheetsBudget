@@ -1,15 +1,87 @@
-.transactions-container {
-  width: 70%;
+.trans-container {
   margin: 10px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 }
 
-.transactions-container hr {
+.trans-container h2 {
+  margin: 0px;
+}
+
+.trans-container hr {
   width: 70%;
 }
 
-.trans__input-date {
-  font: inherit;
+.trans__table {
+  max-height: 60px;
+  transition: max-height 2s ease-in;
+}
+
+.trans__table--active {
+  max-height: 1000px;
+}
+
+.trans__table > :last-child {
+  margin-bottom: 0px;
+}
+
+.trans__row-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.trans__submit {
+  font-size: 32px;
+  margin-left: 5px;
+  cursor: pointer;
+  background-color: transparent;
+  border-style: none;
+  padding: 0;
+  outline: none;
+  transition: all 0.1s;
+}
+
+.trans__submit:hover {
+  transform: scale(1.2);
+}
+
+.trans__submit:active {
+  color: #A5D6A7!important;
+}
+
+.trans__row {
+  flex-grow: 1;
+  border-radius: 15px;
+  padding: 5px 7px 5px 15px;
+  font-size: small;
+  display: flex;
+  align-items: baseline;
+  border-style: solid;
+  border-width: 1px;
+  border-color: green;
+  transition: background-color 0.1s ease-in;
+}
+
+.trans__row .date-input,
+.trans__row .input,
+.trans__row .switch,
+.trans__row > span {
+  margin-right: 8px;
+  width: 120px;
+}
+
+.trans__row > span:last-child {
+  text-align: center;
+}
+
+.trans__row > :last-child {
+  margin-right: 0px;
+}
+
+.row__amount {
+  text-align: right;
 }
