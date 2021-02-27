@@ -1,0 +1,38 @@
+.tab-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 64px;
+  margin-right: auto;
+}
+
+.tab {
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.tab:hover {
+  color: white!important;
+  cursor: pointer;
+}
+
+.tab__indicator {
+  position: absolute;
+  left: 0px;
+  top: 0;
+  height: calc(100% - 2px);
+  border-bottom: 2px solid white;
+}
+
+.indicator--to-right {
+  transition: left 0.2s ease-in, right 0.2s ease-out;
+}
+
+.indicator--to-left {
+  transition: left 0.2s ease-out, right 0.2s ease-in;
+}

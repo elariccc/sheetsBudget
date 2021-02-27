@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import { gapi } from 'gapi-script';
 
@@ -125,11 +126,15 @@ export default function App() {
         showMessage={showMessage}
       />
       <div className='field-container'>
-        <Transactions
-          authState={authState}
-          updateData={updateData}
-          transactionsData={transactionsData}
-        />
+        <Switch>
+          <Route path='/Transactions'>
+            <Transactions
+              authState={authState}
+              updateData={updateData}
+              transactionsData={transactionsData}
+            />
+          </Route>
+        </Switch>
       </div>
       <LoadBar status={updatingStatus}/>
       <MessagePanel message={message}/>

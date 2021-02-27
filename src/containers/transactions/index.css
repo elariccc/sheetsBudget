@@ -63,6 +63,9 @@
   border-style: solid;
   border-width: 1px;
   border-color: green;
+}
+
+form .trans__row {
   transition: background-color 0.1s ease-in;
 }
 
@@ -84,4 +87,16 @@
 
 .row__amount {
   text-align: right;
+}
+
+.pages__number {
+  display: inline-block;
+  padding: 4px;
+  margin: 4px;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in;
+}
+
+.pages__number:active {
+  background-color: #A5D6A7!important;
 }
